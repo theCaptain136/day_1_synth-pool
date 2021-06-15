@@ -63,3 +63,12 @@ int dash_h(int ac, char **av, pokemon_t ***pokedex)
     }
     return (0);
 }
+
+int param_error(pokemon_t ***pokedex, int ac, char **av)
+{
+    if (ac_error(ac, pokedex))
+        return (1);
+    if (doesnt_exist(pokedex, av) == 1)
+        return (1);
+    return (0);
+}

@@ -67,3 +67,14 @@ bool error(char *line)
     }
     return (0);
 }
+
+int malloc_error(pokemon_t **pokedex)
+{
+    if (pokedex == NULL)
+        return (1);
+    if (pokedex[0] == NULL) {
+        fprintf(stderr, "No pokemons found. use -h to find out more\n");
+        return (1);
+    }
+    return (0);
+}

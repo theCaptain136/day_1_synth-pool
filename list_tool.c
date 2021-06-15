@@ -23,6 +23,8 @@ char *frankenstein(char *str)
     char *res = malloc(sizeof(char) * (len_file + len_dir + 1));
     char dir[] = "./pokecfg/";
 
+    if (res == NULL)
+        return (NULL);
     for (int i = 0; i < len_dir; i++) {
         res[i] = dir[i];
     }

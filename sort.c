@@ -37,52 +37,55 @@ int big_brother(pokemon_t **arr)
     return (1);
 }
 
-void struct_swap(pokemon_t *tmp, pokemon_t **arr, int i)
+int struct_swap(pokemon_t *tmp, pokemon_t **arr, int i)
 {
     tmp->name = str_cp(arr[i + 1]->name);
+    if (tmp->name == NULL)
+        return (0);
     tmp->atk = arr[i + 1]->atk;
     tmp->defense = arr[i + 1]->defense;
     tmp->speed = arr[i + 1]->speed;
     tmp->health = arr[i + 1]->health;
     free(arr[i + 1]->name);
     arr[i + 1]->name = str_cp(arr[i]->name);
-    arr[i + 1]->atk = arr[i]->atk;
-    arr[i + 1]->defense = arr[i]->defense;
-    arr[i + 1]->speed = arr[i]->speed;
-    arr[i + 1]->health = arr[i]->health;
-    free(arr[i]->name);
-    arr[i]->name = str_cp(tmp->name);
-    arr[i]->atk = tmp->atk;
-    arr[i]->defense = tmp->defense;
-    arr[i]->speed = tmp->speed;
-    arr[i]->health = tmp->health;
+    if (arr[i + 1]->name == NULL)
+        return (0);
+    struct_swap3(arr, i, tmp);
+    if (arr[i]->name == NULL)
+        return (0);
+    struct_swap2(arr, i, tmp);
+    return (1);
 }
 
-void swap(pokemon_t **arr)
+int swap(pokemon_t **arr)
 {
     int a = 0;
     char o = 0;
     char t = 0;
     pokemon_t *tmp = malloc(sizeof(pokemon_t));
 
+    if (tmp == NULL)
+        return (0);
     for (int i = 0; i < my_len(arr) - 1; i++) {
         swap1((sort){&o, &t, arr, i, &a});
-        if (o >= 'A' && o <= 'Z')
-            o -= 32;
-        if (t >= 'A' && t <= 'Z')
-            t += 32;
+        swap2(&o, &t);
         if (o > t) {
-            struct_swap(tmp, arr, i);
+            if (!struct_swap(tmp, arr, i)) {
+                return (0);
+            }
             free(tmp->name);
         }
         a = 0;
     }
     free(tmp);
+    return (1);
 }
 
-void bubble_sort(pokemon_t **arr)
+int bubble_sort(pokemon_t **arr)
 {
     while (big_brother(arr) == 0) {
-        swap(arr);
+        if (swap(arr) == 0)
+            return (0);
     }
+    return (1);
 }

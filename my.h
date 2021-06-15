@@ -31,6 +31,15 @@ typedef struct sort {
     int *a;
 } sort;
 
+typedef struct str_tok {
+    char **res;
+    int end;
+    int start;
+    int *i;
+    char *str;
+    int *cell;
+} str_tok;
+
 void my_putchar(char c);
 char *my_strstr(char *, char const);
 int my_isneg(int);
@@ -78,11 +87,11 @@ char **my_strtok(char *str, char delim);
 int count_delim(char *str, char delim);
 char *str_cp(char *str);
 bool error(char *line);
-void add_pokemon(pokemon_t ***pokedex, char *path);
+int add_pokemon(pokemon_t ***pokedex, char *path);
 int count_all();
 int count(char *path);
 char *frankenstein(char *str);
-void bubble_sort(pokemon_t **arr);
+int bubble_sort(pokemon_t **arr);
 int my_len(pokemon_t **str);
 int str_cmp(char *one, char *two);
 int fight(pokemon_t **list, char *fighter_one, char *fighter_two);
@@ -95,3 +104,8 @@ void battle1(pokemon_t *one, pokemon_t *two, int atk);
 void battle2(pokemon_t *one, pokemon_t *two, int atk);
 void free_list(pokemon_t ***pokedex);
 void swap1(sort t);
+int malloc_error(pokemon_t **pokedex);
+int param_error(pokemon_t ***pokedex, int ac, char **av);
+void swap2(char *o, char *t);
+void struct_swap2(pokemon_t **arr, int i, pokemon_t *tmp);
+void struct_swap3(pokemon_t **arr, int i, pokemon_t *tmp);
